@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
@@ -11,6 +12,7 @@ import android.widget.NumberPicker;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 public class MonthYearPickerDialog extends DialogFragment {
@@ -40,6 +42,8 @@ public class MonthYearPickerDialog extends DialogFragment {
         monthPicker.setMaxValue(12);
         monthPicker.setValue(cal.get(Calendar.MONTH) + 1);
 
+
+
         int year = cal.get(Calendar.YEAR);
         yearPicker.setMinValue(year);
         yearPicker.setMaxValue(MAX_YEAR);
@@ -51,6 +55,7 @@ public class MonthYearPickerDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         listener.onDateSet(null, yearPicker.getValue(), monthPicker.getValue(), 0);
+                        Log.d("helo", getMonthForInt(monthPicker.getValue()));
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -59,5 +64,15 @@ public class MonthYearPickerDialog extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    String getMonthForInt(int num) {
+        String month = "wrong";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11 ) {
+            month = months[num];
+        }
+        return month;
     }
 }

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                                              MonthYearPickerDialog pd = new MonthYearPickerDialog();
                                              pd.setListener(d);
                                              pd.show(getSupportFragmentManager(), "MonthYearPickerDialog");
+
                                          }
                                      }
         );
